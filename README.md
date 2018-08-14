@@ -179,3 +179,17 @@ play your favorite table games.
   - GET /groups/:id
   - GET /games
   
+
+## Mockup
+
+![alt text](Mockup.png "Mockup")
+  
+## Trello
+
+  https://trello.com/b/gpGrayE6/match-finder
+
+## Github Server-Client
+
+  https://github.com/SandraND/match-finder-server
+
+  https://github.com/SandraND/match-finder-client
