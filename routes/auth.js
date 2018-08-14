@@ -2,7 +2,41 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 
-//const User = require('../models/user);
+const User = require('../models/user');
 
+router.get('/me', (requestAnimationFrame, res, next) => {
+    if(req.session.currentUser) {
+        res.json(req.session.currentUser);
+    } else {
+        res.status(404).json({code: 'not-found'});
+    }
+});
+
+router.post('/login', (req, res, next) => {
+    if(req.session.currentUser) {
+        return res.status(401).json({code: 'unauthorized'});
+    }
+
+    const username = req.body.username;
+    const password = req.body.password;
+
+    if(!username || !password){
+        return res.status(422).json({code: 'validation'});
+    }
+
+    User.findOne({ username })
+        .then((user) => {
+            if(!user) {
+                return res.status(404).json({code: 'not-found'});
+            }
+            if(bcrypt.compareSync(password, user.password)) {
+                req.session.currentUser = user;
+                return res.json(user);
+            } else {
+                return res.status(404).json({code: 'not-found'});
+            }
+        })
+        .catch(next);
+});
 
 module.exports = router;
