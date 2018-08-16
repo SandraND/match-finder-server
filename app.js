@@ -7,11 +7,14 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('./database');
 
+const cors = require('cors');
+
 
 const authRouter = require('./routes/auth');
 const groupsRouter = require('./routes/groups');
 
 const app = express();
+
 
 app.use(session({
   store: new MongoStore({
@@ -26,13 +29,18 @@ app.use(session({
   }
 }));
 
+app.use(cors({
+  origin: [process.env.CORS_URL],
+  credentials: true,
+}));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', authRouter);
+app.use('/auth', authRouter);
 app.use('/groups', groupsRouter);
 
 // catch 404 and forward to error handler

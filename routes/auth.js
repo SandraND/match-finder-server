@@ -4,7 +4,7 @@ const router = express.Router();
 
 const User = require('../models/user');
 
-router.get('/me', (requestAnimationFrame, res, next) => {
+router.get('/me', (req, res, next) => {
     if(req.session.currentUser) {
         res.json(req.session.currentUser);
     } else {

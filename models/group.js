@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 
 const groupSchema = new Schema({
-    owner: {
-        type: mongoose.Schema.Types.ObjectID, ref: 'User' , 
-    },
+    // owner: {
+    //     type: mongoose.Schema.Types.ObjectID, ref: 'User' , 
+    // },
     groupname: {
         type: String,
         required: true,
@@ -42,11 +42,11 @@ const groupSchema = new Schema({
         enum: ['Warhammer40k', 'Magic', 'X-Wing'],
         required: true
     },
-    players: [{
-        type: mongoose.Schema.Types.ObjectID, ref: 'User' , 
-    }]
-}, {
-    timestamps: true
+//     players: [{
+//         type: mongoose.Schema.Types.ObjectID, ref: 'User' , 
+//     }]
+// }, {
+    // timestamps: true
 });
 
 const Group = mongoose.model('Group', groupSchema);
