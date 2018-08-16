@@ -53,6 +53,26 @@ router.post('/', (req, res, next) => {
         .catch(next);
 });
 
+// router.get('/', (req, res, next) => {
+//     if(groupname) {
+//         res.json(Group);
+//     }
+// });
+
+router.get('/games', (req, res, next) => {
+    // const game = req.body.game;
+
+    Group.find() 
+    .then((game) => {
+        if(!game){
+            return res.status(404).json({code: 'not-found'});
+        } else {
+            req.session.game = game;
+            return res.json(game);
+        }
+    })
+});
+
 
 
 
