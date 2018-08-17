@@ -3,12 +3,10 @@ const router = express.Router();
 
 const Group = require('../models/group');
 
-// GET / groups/my-groups
+// GET /groups/my-groups
 // PUT /groups/accept
 // PUT /groups/reject
 // GET /groups
-// GET /groups/:id
-// GET /games
 
 router.post('/', (req, res, next) => {
 
@@ -63,6 +61,20 @@ router.get('/games', (req, res, next) => {
             return res.json(game);
         }
     })
+    .catch(next)
+});
+
+router.get('/search', (req, res, next) => {
+    const groupname = req.query.q;
+
+    Group.findOne({ groupname })
+    .then((group) => {
+        if(!group) {
+            return res.status(404).json({code: 'not-found'});
+        }
+        return res.json(group);
+    })
+    .catch(next);
 });
 
 router.get('/:id', (req, res, next) => {
@@ -78,6 +90,8 @@ router.get('/:id', (req, res, next) => {
             return res.json(group);
         }
     })
+    .catch(next);
 });
+
 
 module.exports = router;
