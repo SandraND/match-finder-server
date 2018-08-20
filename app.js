@@ -13,6 +13,7 @@ const cors = require('cors');
 
 const authRouter = require('./routes/auth');
 const groupsRouter = require('./routes/groups');
+const usersRouter = require('./routes/users');
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/auth', authRouter);
 app.use('/groups', groupsRouter);
+app.use('/players', usersRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -39,6 +39,7 @@ router.post('/login', (req, res, next) => {
         .catch(next);
 });
 
+
 router.post('/signup', (req, res, next) => {
     if(req.session.currentUser) {
         return res.status(401).json({code: 'unauthorized'});
