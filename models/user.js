@@ -9,7 +9,11 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    friends: [{
+        type: ObjectID, 
+        ref: 'User'
+    }]
 }, {
     timestamps: true
 });
