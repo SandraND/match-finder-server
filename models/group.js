@@ -44,11 +44,12 @@ const groupSchema = new Schema({
         enum: ['Warhammer40k', 'Magic', 'X-Wing'],
         required: true
     },
-//     players: [{
-//         type: mongoose.Schema.Types.ObjectID, ref: 'User' , 
-//     }]
-// }, {
-    // timestamps: true
+    players: [{
+        type: ObjectID, 
+        ref: 'User'
+    }]
+}, {
+    timestamps: true
 });
 
 const Group = mongoose.model('Group', groupSchema);

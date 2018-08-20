@@ -7,6 +7,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('./database');
 
+
 const cors = require('cors');
 
 
@@ -33,6 +34,7 @@ app.use(cors({
   origin: [process.env.CORS_URL],
   credentials: true,
 }));
+
 
 app.use(logger('dev'));
 app.use(express.json());
