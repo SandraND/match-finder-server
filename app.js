@@ -6,9 +6,9 @@ const logger = require('morgan');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('./database');
-
-
 const cors = require('cors');
+
+
 require('dotenv').config();
 
 
@@ -36,7 +36,6 @@ app.use(session({
 //   origin: [process.env.CORS_URL],
 //   credentials: true,
 // }));
-
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', process.env.CORS_URL);
   res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
