@@ -7,7 +7,7 @@ const User = require('../models/user');
 
 router.get('/', (req, res, next) => {
     const username = req.query.q;
-    console.log(username);
+
     User.findOne({ username })
         .then((user) => {
             if (!user) {
@@ -21,7 +21,6 @@ router.get('/', (req, res, next) => {
 router.post('/:params', (req, res, next) => {
     const params = req.params.params.split('&');
 
-    console.log(params);
     User.findOne({_id: params[1]})
     .then((user) => {
         if(!user) {
