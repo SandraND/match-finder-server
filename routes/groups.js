@@ -4,11 +4,6 @@ const ObjectId = require('mongodb').ObjectID;
 
 const Group = require('../models/group');
 
-// GET /groups/my-groups
-// PUT /groups/accept
-// PUT /groups/reject
-// GET /groups
-
 router.post('/', (req, res, next) => {
 
     const owner = req.session.currentUser._id;
@@ -64,7 +59,7 @@ router.get('/games', (req, res, next) => {
                 return res.json(game);
             }
         })
-        .catch(next)
+        .catch(next);
 });
 
 router.get('/games/all', (req, res, next) => {
@@ -113,6 +108,19 @@ router.post('/apply/:params', (req, res, next) => {
         })
         .catch(next);
 
+});
+
+router.get('/applied', (req, res, next) => {
+    const player = req.session.currentUser._id;
+
+    Group.find({ players: player})
+    .then((group) => {
+        if(!group) {
+            return res.status(404).json({code: 'not-found'});
+        }
+        return res.json(group);
+    })
+    .catch(next);
 });
 
 router.get('/:id', (req, res, next) => {
