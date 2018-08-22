@@ -20,7 +20,8 @@ router.get('/', (req, res, next) => {
 
 router.get('/friends', (req, res, next) => {
     const player = req.session.currentUser;
-    User.findById(player.friends, 'username id')
+
+    User.find({_id: player.friends}, 'username id')
     .then((user) => {
         if(!user) {
             return res.status(404).json({code: 'not-found'});
