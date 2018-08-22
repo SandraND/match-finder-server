@@ -91,7 +91,6 @@ router.get('/search', (req, res, next) => {
 
 router.post('/apply/:params', (req, res, next) => {
     const params = req.params.params.split('&');
-    console.log(params);
 
     Group.findOne({ _id: params[1]})
         .then((group) => {

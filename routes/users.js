@@ -18,6 +18,20 @@ router.get('/', (req, res, next) => {
         .catch(next);
 });
 
+router.get('/friends', (req, res, next) => {
+    const player = req.session.currentUser;
+    User.findById(player.friends, 'username id')
+    .then((user) => {
+        if(!user) {
+            return res.status(404).json({code: 'not-found'});
+        }
+        console.log(user)
+        console.log('------------');
+        return res.json(user);
+    })
+    .catch(next);
+});
+
 router.post('/:params', (req, res, next) => {
     const params = req.params.params.split('&');
 
