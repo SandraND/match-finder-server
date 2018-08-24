@@ -26,6 +26,7 @@ router.post('/', (req, res, next) => {
             if (groupExists) {
                 return res.status(422).json({ code: 'groupname-not-unique' });
             }
+            
             const newGroup = Group({
                 owner,
                 groupname,
@@ -100,13 +101,11 @@ router.post('/apply/:params', (req, res, next) => {
             group.players.push(params[0]);
             group.save()
             .then(() => {
-                console.log('Player saved on group.');
                 res.status(200).json({code: 'player-saved'})
             })
             .catch(next);
         })
         .catch(next);
-
 });
 
 router.get('/applied', (req, res, next) => {
@@ -123,7 +122,6 @@ router.get('/applied', (req, res, next) => {
 });
 
 router.get('/:id', (req, res, next) => {
-
     const id = req.params.id;
 
     Group.findOne({ _id: id })
@@ -136,9 +134,6 @@ router.get('/:id', (req, res, next) => {
             }
         })
         .catch(next);
-
 });
-
-
 
 module.exports = router;

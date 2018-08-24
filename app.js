@@ -8,16 +8,13 @@ const MongoStore = require('connect-mongo')(session);
 const mongoose = require('./database');
 const cors = require('cors');
 
-
 require('dotenv').config();
-
 
 const authRouter = require('./routes/auth');
 const groupsRouter = require('./routes/groups');
 const usersRouter = require('./routes/users');
 
 const app = express();
-
 
 app.use(session({
   store: new MongoStore({
@@ -32,10 +29,6 @@ app.use(session({
   }
 }));
 
-// app.use(cors({
-//   origin: [process.env.CORS_URL],
-//   credentials: true,
-// }));
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', process.env.CORS_URL);
   res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
